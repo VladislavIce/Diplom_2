@@ -1,5 +1,7 @@
 package usertest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
@@ -28,15 +30,16 @@ public class UpdateDataUserTest {
         accessToken = response.successCreate(createUser);
     }
 
-
-    // Обновляем все поля у пользователя
+    @DisplayName("Проверить обновление данных пользователя")
+    @Description("Изменение данных пользователя с авторизацией")
     @Test
     public void successUpdateDataUser() {
         ValidatableResponse fullUpdateDataUser = request.successUpdateDataUser(updateDataUser, accessToken);
         response.successUpdateUser(fullUpdateDataUser);
     }
 
-    // Обноляем поле Email у пользователя
+    @DisplayName("Проверить обновление email пользователя")
+    @Description("Изменение email пользователя с авторизацией")
     @Test
     public void successUpdateDataUserEmail() {
         UpdateUser updateDataUserEmail = new UpdateUser(updateDataUser.getEmail(), user.getName());
@@ -45,6 +48,8 @@ public class UpdateDataUserTest {
     }
 
     // Обновляем поле Name у пользователя
+    @DisplayName("Проверить обновление имя пользователя")
+    @Description("Изменение имя пользователя с авторизацией")
     @Test
     public void successUpdateDataUserName() {
         UpdateUser updateDataUserName = new UpdateUser(user.getEmail(), updateDataUser.getName());
@@ -52,15 +57,16 @@ public class UpdateDataUserTest {
         response.successUpdateUser(updateNameUser);
     }
 
-    // Обновление всех полей без токена
+    @DisplayName("Проверить обновление данных пользователя")
+    @Description("Изменение данных пользователя без авторизации")
     @Test
     public void failedUpdateDataUser() {
         ValidatableResponse failedFullUpdateUser = request.failedUpdateDataUser(updateDataUser);
         response.failedUpdateUser(failedFullUpdateUser);
     }
 
-
-    // Обновление поля Email без токена
+    @DisplayName("Проверить обновление email пользователя")
+    @Description("Изменение email пользователя без авторизации")
     @Test
     public void failedUpdateDataUserEmail() {
         UpdateUser updateDataUserEmail = new UpdateUser(updateDataUser.getEmail(), user.getName());
@@ -68,7 +74,8 @@ public class UpdateDataUserTest {
         response.failedUpdateUser(failedUpdateDataEmailUser);
     }
 
-    // Обновление поле Name без токена
+    @DisplayName("Проверить обновление имя пользователя")
+    @Description("Изменение имя пользователя без авторизации")
     @Test
     public void failedUpdateDataUserName(){
         UpdateUser updateDataUserName = new UpdateUser(user.getEmail(), updateDataUser.getName());

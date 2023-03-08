@@ -43,10 +43,10 @@ public class OrderResponse {
     public void getOrderAuthorizationUser(ValidatableResponse response){
         response.assertThat().statusCode(200)
                 .body("success", equalTo(true))
-                .body("orders", nullValue())
                 .body("total", notNullValue())
                 .body("totalToday", notNullValue());
     }
+
 
 
 
@@ -56,16 +56,4 @@ public class OrderResponse {
                 .body("success", equalTo(false))
                 .body("message", equalTo("You should be authorised"));
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

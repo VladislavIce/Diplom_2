@@ -1,5 +1,7 @@
 package usertest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
@@ -25,14 +27,15 @@ public class CreateUserTest {
         accessToken = response.successCreate(createUser);
     }
 
-    // Создание нового пользователя с существующими данными
+    @DisplayName("Проверить создание пользователя, который уже зарегистрирован")
     @Test
     public void creatingUserWithExistingData() {
         ValidatableResponse createUser = request.successfulСreation(user);
         response.errorWhenCreating2(createUser);
     }
 
-    // Создание нового пользователя без поля Name
+    @DisplayName("Проверить создание пользователя и не заполнить одно из обязательных полей")
+    @Description("Проверяем запрос без обязательного поля Name")
     @Test
     public void creatingNewUserWithoutNecessarilyField(){
         IncompleteUser incompleteUser = new IncompleteUser(user.getEmail(), user.getPassword());
@@ -40,7 +43,7 @@ public class CreateUserTest {
         response.errorWhenCreating(failCreateUser);
     }
 
-    // Удаление созданого пользовтеля
+    // Удаление созданого пользователя
     @After
     public void deleteUser(){
         ValidatableResponse deleteUser = request.deleteUser(accessToken);

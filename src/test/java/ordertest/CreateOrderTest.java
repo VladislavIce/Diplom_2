@@ -1,5 +1,7 @@
 package ordertest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import order.*;
 import org.junit.After;
@@ -39,29 +41,28 @@ public class CreateOrderTest {
         accessToken = response.successCreate(createUser);
     }
 
-    // Создание заказа без авторизацией пользователя
+    @DisplayName("Проверить создание заказа без авторизации")
     @Test
     public void createOrdersNotAuthorizationUser(){
         ValidatableResponse successCreateOrder =  orderRequest.creatingOrderWithoutUserAuthorization(createOrderBody);
         orderResponse.successfulCreateOrders(successCreateOrder);
     }
 
-
-    // Создание заказа с авторизацией пользователя
+    @DisplayName("Проверить создание заказа с авторизацией")
     @Test
     public void createOrdersTheAuthorizationUser(){
         ValidatableResponse createOrder = orderRequest.createOrdersTheAuthorization(createOrderBody, accessToken);
         orderResponse.successfulCreateOrders(createOrder);
     }
 
-    // Создание заказа без ингритиента
+    @DisplayName("Проверить создание заказа без ингредиентов")
     @Test
     public void creatingOrderWithoutIngredients(){
         ValidatableResponse createOrder = orderRequest.creatingOrderWithoutUserAuthorization(createOrderBody1);
         orderResponse.failedCreateOrders(createOrder);
     }
 
-    // Создание заказа с неверным хешем ингредиентов
+    @DisplayName("Проверить создание заказа с неверным хешем ингредиентов")
     @Test
     public void creatingOrderWithIncorrectHashIngredients(){
         ValidatableResponse createOrder =  orderRequest.creatingOrderWithoutUserAuthorization(createOrderBody2);

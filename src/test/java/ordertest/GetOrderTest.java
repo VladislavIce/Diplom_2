@@ -1,5 +1,7 @@
 package ordertest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import order.OrderRequest;
 import order.OrderResponse;
@@ -21,7 +23,6 @@ public class GetOrderTest {
     UserRequest request = new UserRequest();
     UserResponse response = new UserResponse();
 
-
     public String accessToken;
 
     // Создание нового пользователя
@@ -31,30 +32,19 @@ public class GetOrderTest {
         accessToken = response.successCreate(createUser);
     }
 
-    // Получение списка заказа с авторизацией
+    @DisplayName("Проверить получение заказов конкретного пользователя")
+    @Description("Проверяем заказы авторизованного пользователя")
     @Test
-    public void getOrderTestAutUser(){
-        ValidatableResponse qwerty = orderRequest.getOrderAuthorizationUser(accessToken);
-        orderResponse.getOrderAuthorizationUser(qwerty);
+    public void getOrderAuthorizedUser(){
+        ValidatableResponse userOrder = orderRequest.getOrderAuthorizationUser(accessToken);
+        orderResponse.getOrderAuthorizationUser(userOrder);
     }
 
-    // Получение списка заказа без авторизации
+    @DisplayName("Проверить получение заказов конкретного пользователя")
+    @Description("Проверяем заказы неавторизованного пользователя")
     @Test
-    public void getOrderTestNotAutUser(){
-        ValidatableResponse qwert1 = orderRequest.getOrderNotAuthorizationUser();
-        orderResponse.getOrderNotAuthorizationUser(qwert1);
+    public void getOrderUnauthorizedUser(){
+        ValidatableResponse userOrder = orderRequest.getOrderNotAuthorizationUser();
+        orderResponse.getOrderNotAuthorizationUser(userOrder);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

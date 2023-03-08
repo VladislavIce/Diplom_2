@@ -1,12 +1,13 @@
 package usertest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import user.*;
 
-import static io.restassured.RestAssured.given;
 
 public class UserAuthorizationTest {
 
@@ -32,21 +33,24 @@ public class UserAuthorizationTest {
         accessToken = response.successCreate(createUser);
     }
 
-    // Успешная авторизация пользовтеля
+    @DisplayName("Проверить успешную авторизацию пользователя")
+    @Description("Авторизация под существующим пользователем")// Успешная авторизация пользовтеля
     @Test
     public void successfulAuthorizationUser(){
     ValidatableResponse authorization = request.successfulAuthorization(incompleteUser);
     response.successfulAuthorization(authorization);
     }
 
-    // Авторизация пользователя с не валидным Email
+    @DisplayName("Проверить авторизация пользователя с невалидным Email")
+    @Description("Авторизация с неверным логином")
     @Test
     public void authorizationWithInvalidEmail(){
         ValidatableResponse failedAuthorization = request.successfulAuthorization(incompleteUser1);
         response.authorizationWithInvalidEmailOrPassword(failedAuthorization);
     }
 
-    // Авторизация пользователя с не валидным Password
+    @DisplayName("Проверить авторизация пользователя с невалидным Password")
+    @Description("Авторизация с неверным паролем")
     @Test
     public void authorizationWithInvalidPassword(){
     ValidatableResponse failAuthorization = request.successfulAuthorization(incompleteUser2);
@@ -56,7 +60,7 @@ public class UserAuthorizationTest {
     // Удаление пользователя
     @After
     public void deleteUser() {
-        ValidatableResponse deleteUser = request.deleteUser(accessToken);
-        response.successDeleteUser(deleteUser);
+            ValidatableResponse deleteUser = request.deleteUser(accessToken);
+            response.successDeleteUser(deleteUser);
     }
 }

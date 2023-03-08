@@ -44,7 +44,7 @@ public class OrderRequest {
                 .contentType(ContentType.JSON)
                 .baseUri(URL)
                 .when()
-                .get()
+                .get(ORDERS_API_ENDPOINT)
                 .then().log().all();
 
 
@@ -57,15 +57,7 @@ public class OrderRequest {
                 .headers("Authorization", accessToken)
                 .baseUri(URL)
                 .when()
-                .get()
+                .get(ORDERS_API_ENDPOINT)
                 .then().log().all();
     }
-
-
-
-
-
-
-
-
 }
