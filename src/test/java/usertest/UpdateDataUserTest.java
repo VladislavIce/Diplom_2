@@ -21,12 +21,12 @@ public class UpdateDataUserTest {
     UserRequest request = new UserRequest();
     UserResponse response = new UserResponse();
 
-    public String accessToken;
+    private String accessToken;
 
     // Создание нового пользователя
     @Before
     public void successfulCreationOfNewUser() {
-        ValidatableResponse createUser = request.successfulСreation(user);
+        ValidatableResponse createUser = request.successfulCreate(user);
         accessToken = response.successCreate(createUser);
     }
 
@@ -85,8 +85,9 @@ public class UpdateDataUserTest {
 
     // Удаление пользователя
     @After
-    public void deleteUser(){
-        ValidatableResponse deleteUser = request.deleteUser(accessToken);
-        response.successDeleteUser(deleteUser);
+    public void deleteUser() {
+        if (accessToken != null) {
+            request.deleteUser(accessToken);
+        }
     }
 }

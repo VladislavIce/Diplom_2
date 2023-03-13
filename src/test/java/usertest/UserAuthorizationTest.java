@@ -23,13 +23,13 @@ public class UserAuthorizationTest {
 
     UserRequest request = new UserRequest();
     UserResponse response = new UserResponse();
-    public String accessToken;
+    private String accessToken;
 
 
     // Создаем нового пользовтеля
     @Before
     public void successfulCreationOfNewUser() {
-        ValidatableResponse createUser = request.successfulСreation(user);
+        ValidatableResponse createUser = request.successfulCreate(user);
         accessToken = response.successCreate(createUser);
     }
 
@@ -60,7 +60,8 @@ public class UserAuthorizationTest {
     // Удаление пользователя
     @After
     public void deleteUser() {
-            ValidatableResponse deleteUser = request.deleteUser(accessToken);
-            response.successDeleteUser(deleteUser);
+        if (accessToken != null) {
+            request.deleteUser(accessToken);
+        }
     }
 }

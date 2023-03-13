@@ -19,7 +19,7 @@ public class UserRequest {
     private final String UPDATE_API_ENDPOINT = "api/auth/user";
 
     // Запрос на создание нового пользвотеля
-    public ValidatableResponse successfulСreation(User user){
+    public  ValidatableResponse successfulCreate(User user){
         return given().log().all()
                 .contentType(ContentType.JSON)
                 .baseUri(URL)

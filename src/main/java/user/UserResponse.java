@@ -1,9 +1,8 @@
 package user;
-import org.junit.Assert;
-import io.restassured.response.ValidatableResponse;
-import org.junit.Test;
 
+import io.restassured.response.ValidatableResponse;
 import static org.hamcrest.CoreMatchers.*;
+
 
 
 public class UserResponse {
@@ -18,11 +17,12 @@ public class UserResponse {
                 .extract().path("accessToken");
     }
 
-    public void errorWhenCreating(ValidatableResponse response) {
-        response.assertThat()
+    public String errorWhenCreating(ValidatableResponse response) {
+       return response.assertThat()
                 .statusCode(403)
                 .body("success", equalTo(false))
-                .body("message", equalTo("Email, password and name are required fields"));
+                .body("message", equalTo("Email, password and name are required fields"))
+                .extract().path("accessToken");
     }
 
     public void errorWhenCreating2(ValidatableResponse response){

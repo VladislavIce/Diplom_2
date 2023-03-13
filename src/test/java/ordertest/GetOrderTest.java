@@ -23,12 +23,12 @@ public class GetOrderTest {
     UserRequest request = new UserRequest();
     UserResponse response = new UserResponse();
 
-    public String accessToken;
+    private String accessToken;
 
     // Создание нового пользователя
     @Before
     public void successfulCreationOfNewUser() {
-        ValidatableResponse createUser = request.successfulСreation(user);
+        ValidatableResponse createUser = request.successfulCreate(user);
         accessToken = response.successCreate(createUser);
     }
 
@@ -46,5 +46,13 @@ public class GetOrderTest {
     public void getOrderUnauthorizedUser(){
         ValidatableResponse userOrder = orderRequest.getOrderNotAuthorizationUser();
         orderResponse.getOrderNotAuthorizationUser(userOrder);
+    }
+
+    // Удаление созданого пользовтеля
+    @After
+    public void deleteUser() {
+        if (accessToken != null) {
+            request.deleteUser(accessToken);
+        }
     }
 }

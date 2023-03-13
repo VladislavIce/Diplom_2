@@ -14,7 +14,7 @@ public class OrderRequest {
 
 
     // Создание заказа без авторизации пользователя
-    public ValidatableResponse creatingOrderWithoutUserAuthorization(CreateOrderBody createOrderBody){
+    public ValidatableResponse createOrderWithoutUserAuthorization(CreateOrderBody createOrderBody){
         return  given().log().all()
                 .contentType(ContentType.JSON)
                 .body(createOrderBody)
