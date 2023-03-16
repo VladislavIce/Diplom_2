@@ -16,7 +16,4 @@ public class CreateUserData {
                 RandomStringUtils.randomAlphanumeric(10));
     }
 
-    public User existingUser() {
-        return new User("qwefdfs@yandex.ru", "122333323", "UserName");
-    }
 }

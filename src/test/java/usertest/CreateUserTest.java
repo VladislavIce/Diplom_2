@@ -12,9 +12,6 @@ public class CreateUserTest {
 
     CreateUserData createUser = new CreateUserData();
     User user = createUser.random();
-
-    User existingUser = createUser.existingUser();
-
     UserRequest request = new UserRequest();
     UserResponse response = new UserResponse();
     private String accessToken;
@@ -22,15 +19,17 @@ public class CreateUserTest {
     @DisplayName("Проверить создание нового пользователя")
     @Test
     public void successfulCreateOfNewUser() {
-        ValidatableResponse createUser = request.successfulCreate(user);
-        accessToken = response.successCreate(createUser);
+        ValidatableResponse createNewUser = request.successfulCreate(user);
+        accessToken = response.successCreate(createNewUser);
     }
 
     @DisplayName("Проверить создание пользователя, который уже зарегистрирован")
     @Test
     public void createUserWithExistingData() {
-        ValidatableResponse createUser = request.successfulCreate(existingUser);
-        response.errorWhenCreating2(createUser);
+        ValidatableResponse createNewUser = request.successfulCreate(user);
+        ValidatableResponse createUserWithExistingData = request.successfulCreate(user);
+        accessToken = response.errorCreateUserWithExistingData(createUserWithExistingData);
+        accessToken = response.successCreate(createNewUser);
     }
 
     @DisplayName("Проверить создание пользователя и не заполнить одно из обязательных полей")

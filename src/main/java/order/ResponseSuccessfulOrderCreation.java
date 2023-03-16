@@ -7,7 +7,7 @@ package order;
         private Order order;
 
 
-        public boolean isSuccess() {
+        public boolean getSuccess() {
             return success;
         }
 

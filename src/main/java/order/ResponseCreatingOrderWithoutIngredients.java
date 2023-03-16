@@ -2,14 +2,14 @@ package order;
 
 public class ResponseCreatingOrderWithoutIngredients {
 
-    private String success;
+    private boolean success;
     private String message;
 
-    public String getSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(String success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 

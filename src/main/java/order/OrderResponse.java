@@ -14,12 +14,9 @@ public class OrderResponse {
                 .statusCode(200)
                 .extract()
                 .as(ResponseSuccessfulOrderCreation.class);
-        Assert.assertTrue("success", true);
+        Assert.assertTrue(orderStatusCode.getSuccess());
         Assert.assertNotNull(orderStatusCode.getName());
         Assert.assertNotNull(orderStatusCode.getOrder());
-        System.out.println(orderStatusCode.isSuccess());
-        System.out.println(orderStatusCode.getName());
-        System.out.println(orderStatusCode.getOrder());
     }
 
     // Создание заказа без ингридиентов 400 Bad Request
@@ -29,7 +26,7 @@ public class OrderResponse {
                 .statusCode(400)
                 .extract()
                 .as(ResponseCreatingOrderWithoutIngredients.class);
-        Assert.assertFalse("succes", false);
+        Assert.assertFalse(responseCreatingOrderWithoutIngredients.getSuccess());
         Assert.assertEquals("Ingredient ids must be provided", responseCreatingOrderWithoutIngredients.getMessage());
     }
 

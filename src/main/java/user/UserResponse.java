@@ -7,31 +7,35 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class UserResponse {
     public String successCreate(ValidatableResponse response) {
-        return response.assertThat()
+        String token = response.extract().path("accessToken");
+        response.assertThat()
                 .statusCode(200)
                 .body("success", equalTo(true))
                 .body("user.email", notNullValue())
                 .body("user.name", notNullValue())
                 .body("accessToken", notNullValue())
-                .body("refreshToken", notNullValue())
-                .extract().path("accessToken");
+                .body("refreshToken", notNullValue());
+        return token;
     }
 
     public String errorWhenCreating(ValidatableResponse response) {
-       return response.assertThat()
-                .statusCode(403)
-                .body("success", equalTo(false))
-                .body("message", equalTo("Email, password and name are required fields"))
-                .extract().path("accessToken");
+       String token = response.extract().path("accessToken");
+       response.assertThat()
+               .statusCode(403)
+               .body("success", equalTo(false))
+               .body("message", equalTo("Email, password and name are required fields"));
+       return token;
     }
 
-    public void errorWhenCreating2(ValidatableResponse response){
+    public String errorCreateUserWithExistingData(ValidatableResponse response){
+        String token = response.extract().path("accessToken");
         response.assertThat()
                 .statusCode(403)
                 .body("success", equalTo(false))
                 .body("message", equalTo("User already exists"));
-    }
+        return token;
 
+    }
 
     public void successfulAuthorization(ValidatableResponse response){
         response.assertThat()
@@ -56,9 +60,6 @@ public class UserResponse {
                 .statusCode(202)
                 .body("success", equalTo(true))
                 .body("message", equalTo("User successfully removed"));
-
-
-
     }
 
     // Успешное обновление пользователя 200 ОК
