@@ -9,7 +9,7 @@ public class OrderResponse {
 
 
     // Успешное создание заказа 200 ОК
-    public void successfulCreateOrders(ValidatableResponse response){
+    public void successCreateOrder(ValidatableResponse response){
             ResponseSuccessfulOrderCreation orderStatusCode = response
                 .statusCode(200)
                 .extract()
@@ -20,7 +20,7 @@ public class OrderResponse {
     }
 
     // Создание заказа без ингридиентов 400 Bad Request
-    public void failedCreateOrders(ValidatableResponse response){
+    public void failCreateOrder(ValidatableResponse response){
 
         ResponseCreatingOrderWithoutIngredients responseCreatingOrderWithoutIngredients = response
                 .statusCode(400)

@@ -40,21 +40,21 @@ public class CreateOrderTest {
     @Test
     public void createOrdersNotAuthorizationUser() {
         ValidatableResponse successCreateOrder = orderRequest.createOrderWithoutUserAuthorization(createOrderBody);
-        orderResponse.successfulCreateOrders(successCreateOrder);
+        orderResponse.successCreateOrder(successCreateOrder);
     }
 
     @DisplayName("Проверить создание заказа с авторизацией")
     @Test
     public void createOrdersTheAuthorizationUser() {
         ValidatableResponse createOrder = orderRequest.createOrdersTheAuthorization(createOrderBody, accessToken);
-        orderResponse.successfulCreateOrders(createOrder);
+        orderResponse.successCreateOrder(createOrder);
     }
 
     @DisplayName("Проверить создание заказа без ингредиентов")
     @Test
     public void createOrderWithoutIngredients() {
         ValidatableResponse createOrder = orderRequest.createOrderWithoutUserAuthorization(createOrderBody1);
-        orderResponse.failedCreateOrders(createOrder);
+        orderResponse.failCreateOrder(createOrder);
     }
 
     @DisplayName("Проверить создание заказа с неверным хешем ингредиентов")
